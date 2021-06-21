@@ -2,25 +2,38 @@ package com.bu.safeguard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.bu.safeguard.chatOperation.selectFriendGroupAdapter;
 import com.bu.safeguard.fragment.FriendsChatFragment;
 import com.bu.safeguard.fragment.GroupsFragment;
 import com.bu.safeguard.fragment.NottificationFragment;
+import com.bu.safeguard.models.groupFriendModel;
 import com.bu.safeguard.models.listModel;
+import com.bu.safeguard.models.modelForProfile;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity  {
 
     ArrayList<listModel> list ;
 
@@ -88,17 +101,20 @@ public class BaseActivity extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
 
 
 
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //  startActivity(new Intent(BaseActivity.this , NewMessageActivity.class));
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//
+//
+//
+//
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //  startActivity(new Intent(BaseActivity.this , NewMessageActivity.class));
+//            }
+//        });
 
 
 

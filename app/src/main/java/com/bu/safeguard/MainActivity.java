@@ -866,7 +866,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void upadateUserCurrentLocation(double wayLatitude, double wayLongitude) {
+    private void  upadateUserCurrentLocation(double wayLatitude, double wayLongitude) {
         UserLatLng = new LatLng(wayLatitude, wayLongitude);
 
         DatabaseReference mref = FirebaseDatabase.getInstance().getReference("profile").child(uid);

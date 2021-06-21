@@ -3378,6 +3378,7 @@ id contentPanel
 id coordinator
 id coordinatorLayout
 id cos
+id create
 id cropImageView
 id crop_image_menu_crop
 id crop_image_menu_flip
@@ -3458,6 +3459,7 @@ id floating
 id forever
 id forward
 id fragment_container_view_tag
+id friendList
 id fullName
 id full_layout
 id ghost_view
@@ -3471,6 +3473,7 @@ id gone
 id gradient
 id graph
 id graph_wrap
+id groupList
 id group_divider
 id grouping
 id groups
@@ -3503,6 +3506,7 @@ id indicator_container
 id info
 id inline
 id invisible
+id isDone
 id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
@@ -3587,6 +3591,7 @@ id multiply
 id my_Profile
 id my_friend
 id name
+id nameEt
 id nameOnFriendReq
 id nameOndrawerLayout
 id navigation_header_container
@@ -3954,6 +3959,7 @@ layout fragment_friends_chat_list
 layout fragment_group_list
 layout fragment_main
 layout fragment_nottification
+layout fullscreen_create_dialogue
 layout image_dialouge
 layout list_item_seat
 layout main
@@ -4003,6 +4009,7 @@ layout notification_template_part_chronometer
 layout notification_template_part_time
 layout onesignal_bgimage_notif_layout
 layout row
+layout row_create_group_row
 layout row_for_chat_display
 layout row_for_create_group
 layout row_for_friend_request

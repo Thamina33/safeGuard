@@ -3,19 +3,38 @@ package com.bu.safeguard.chatOperation;
 public class chatMsgModel {
     String msg , msg_id , uid  , content_type , content_link    ;
     Long time ;
+    String  userName , user_pp ;
 
 
     public chatMsgModel() {
     }
 
 
-    public chatMsgModel(String msg, String msg_id, String uid, String content_type, String content_link, Long time) {
+    public chatMsgModel(String msg, String msg_id, String uid, String content_type, String content_link, Long time, String userName, String user_pp) {
         this.msg = msg;
         this.msg_id = msg_id;
         this.uid = uid;
         this.content_type = content_type;
         this.content_link = content_link;
         this.time = time;
+        this.userName = userName;
+        this.user_pp = user_pp;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUser_pp() {
+        return user_pp;
+    }
+
+    public void setUser_pp(String user_pp) {
+        this.user_pp = user_pp;
     }
 
     public String getContent_type() {

@@ -154,6 +154,8 @@ public class FriendsChatFragment extends Fragment {
 
                             o.putExtra("frindShipId", frindShipId);
                             o.putExtra("friendUserID", friendUserID);
+                            o.putExtra("group", "no");
+                            o.putExtra("groupID", "model");
                             startActivity(o);
 
                             // Toast.makeText(context , friendUserID , Toast.LENGTH_SHORT).show();
@@ -163,6 +165,8 @@ public class FriendsChatFragment extends Fragment {
 
                             o.putExtra("frindShipId", frindShipId);
                             o.putExtra("friendUserID", friendUserID);
+                            o.putExtra("group", "no");
+                            o.putExtra("groupID", "model");
                             //Toast.makeText(context , friendUserID , Toast.LENGTH_SHORT).show();
                             startActivity(o);
                         }

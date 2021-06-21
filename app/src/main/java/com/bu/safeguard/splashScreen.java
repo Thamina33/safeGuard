@@ -7,12 +7,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class splashScreen extends AppCompatActivity {
+
+    FirebaseAuth auth ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        auth = FirebaseAuth.getInstance() ;
 
         getSupportActionBar().hide();
 
@@ -32,9 +37,20 @@ public class splashScreen extends AppCompatActivity {
                 else {
                     // not the first install
 
-                    Intent i = new Intent(getApplicationContext() , login_activity.class);
-                    startActivity(i);
-                    finish();
+                    if(auth.getUid() == null){
+                        Intent i = new Intent(getApplicationContext() , login_activity.class);
+                        startActivity(i);
+                        finish();
+
+
+                    }else {
+                        Intent i = new Intent(getApplicationContext() , MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+
+
                 }
 
 
@@ -43,4 +59,6 @@ public class splashScreen extends AppCompatActivity {
 
 
     }
+
+
 }

@@ -115,7 +115,8 @@ public class myFriendList extends AppCompatActivity {
                          String friendUserID =    getItem(position).getFriendUserID() ;
 
                         Intent o  = new Intent(getApplicationContext() , chatPage.class );
-
+                        o.putExtra("group", "no");
+                        o.putExtra("groupID", "model");
                         o.putExtra("frindShipId" , frindShipId) ;
                         o.putExtra("friendUserID" , friendUserID) ;
                         startActivity(o);

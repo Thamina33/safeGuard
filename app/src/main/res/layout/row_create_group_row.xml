@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="5"
+    android:layout_margin="10dp"
+    android:layout_height="100dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_height="@dimen/_60sdp"
+        android:src="@color/grey"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:textSize="18sp"
+
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/isDone"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:checked="false"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

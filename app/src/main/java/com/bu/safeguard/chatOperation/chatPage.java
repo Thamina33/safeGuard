@@ -2,6 +2,7 @@ package com.bu.safeguard.chatOperation;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bu.safeguard.R;
-import com.bu.safeguard.models.modelForProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +37,7 @@ public class chatPage extends AppCompatActivity {
     ImageView sendBtn;
     String frindShipId, friendUserID, friendUserName, friendPP;
     String uid;
+    String name = "", userImage = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +58,8 @@ public class chatPage extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        friendUserID = intent.getStringExtra("friendUserID");
-        frindShipId = intent.getStringExtra("frindShipId");
 
-        getSupportActionBar().setTitle(friendUserName);
+        getSupportActionBar().setTitle("Chat");
 
         llm = new LinearLayoutManager(getApplicationContext());
         llm.setStackFromEnd(true);
@@ -71,21 +69,29 @@ public class chatPage extends AppCompatActivity {
 
         recyclerView.setLayoutManager(llm);
 
-        mref = FirebaseDatabase.getInstance().getReference("chat_repo");
-        histroyref = FirebaseDatabase.getInstance().getReference("chatHistory");
+        if (getIntent().getStringExtra("group").contains("yes")) {
+            friendUserID = "";
+            frindShipId = "";
+            mref = FirebaseDatabase.getInstance().getReference(intent.getStringExtra("groupID")).child("msg");
+            histroyref = FirebaseDatabase.getInstance().getReference(intent.getStringExtra("groupID")).child("lastMsg");
 
-        if (frindShipId.isEmpty()) {
+        } else {
+            friendUserID = intent.getStringExtra("friendUserID");
+            frindShipId = intent.getStringExtra("frindShipId");
+          //  mref = FirebaseDatabase.getInstance().getReference("chat_repo");
+           histroyref = FirebaseDatabase.getInstance().getReference("chatHistory");
+        }
 
 
-            AlertDialog dialog = new AlertDialog.Builder(getApplicationContext()).create();
+        if (frindShipId.isEmpty() && !getIntent().getStringExtra("group").contains("yes")) {
+
+
+            AlertDialog dialog = new AlertDialog.Builder(chatPage.this).create();
             dialog.setTitle("Something went Wrong !!");
             dialog.show();
 
 
         } else {
-            mref = FirebaseDatabase.getInstance().getReference("chat_repo").child(frindShipId);
-
-            //checKIfOldConversionExists() ;
 
             downloadMsg();
         }
@@ -103,7 +109,7 @@ public class chatPage extends AppCompatActivity {
                 } else {
 
                     sendTheMsg(msg);
-
+                    chatINput.setText("");
 
                 }
 
@@ -145,14 +151,18 @@ public class chatPage extends AppCompatActivity {
         String msg_ID = mref.push().getKey();
         // String msg , msg_id , uid , time   ;
 
-        final chatMsgModel msgModel = new chatMsgModel(msg.trim(), msg_ID, uid, "null", "null", System.currentTimeMillis() / 1000);
+        final chatMsgModel msgModel = new chatMsgModel(msg.trim(), msg_ID, uid, "null", "null", System.currentTimeMillis() / 1000, name, userImage);
 
 
         mref.child(msg_ID).setValue(msgModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 chatINput.setText("");
-                writeChatHistory(uid, friendUserID, frindShipId, msgModel.msg);
+
+                if (!getIntent().getStringExtra("group").contains("yes")) {
+                    writeChatHistory(uid, friendUserID, frindShipId, msgModel.msg);
+                }
+
 
                 // chatINput.getText().clear();
             }
@@ -164,37 +174,44 @@ public class chatPage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        downloadTheFriendData();
+        //  downloadTheFriendData();
 
     }
 
-    private void downloadTheFriendData() {
-
-        DatabaseReference fref = FirebaseDatabase.getInstance().getReference("profile");
-        fref.keepSynced(true);
-
-        fref.child(friendUserID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                modelForProfile model = dataSnapshot.getValue(modelForProfile.class);
-
-                friendUserName = model.getNickName();
-
-                getSupportActionBar().setTitle("Chatting With " + friendUserName);
-
-                friendPP = model.getPpLink();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
+//    private void downloadTheFriendData() {
+//
+//        DatabaseReference fref = FirebaseDatabase.getInstance().getReference("profile");
+//        fref.keepSynced(true);
+//
+//        fref.child(friendUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                modelForProfile model = dataSnapshot.getValue(modelForProfile.class);
+//
+//                friendUserName = model.getNickName();
+//
+//                getSupportActionBar().setTitle("Chatting With " + friendUserName);
+//
+//                friendPP = model.getPpLink();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//    }
 
     private void downloadMsg() {
+
+        if (!getIntent().getStringExtra("group").contains("yes")) {
+            mref = FirebaseDatabase.getInstance().getReference("chat_repo").child(frindShipId);
+        } else {
+            mref = FirebaseDatabase.getInstance().getReference("groupList").child(getIntent().getStringExtra("groupID")).child("msg");
+        }
+
 
         loadedChat = new ArrayList<>();
 
@@ -202,20 +219,22 @@ public class chatPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                loadedChat.clear();
+                if (dataSnapshot.exists()) {
+                    loadedChat.clear();
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    chatMsgModel chat = ds.getValue(chatMsgModel.class);
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        chatMsgModel chat = ds.getValue(chatMsgModel.class);
 
-                    // Log.d("MSGESDSS" , chat.getMsg()  );
-                    loadedChat.add(chat);
+                        // Log.d("MSGESDSS" , chat.getMsg()  );
+                        loadedChat.add(chat);
+                    }
+                    //
+                    chatAdapter = new chatAdapter(getApplicationContext(), loadedChat);
+                    chatAdapter.notifyDataSetChanged();
+
+                    // set adapter
+                    recyclerView.setAdapter(chatAdapter);
                 }
-                //
-                chatAdapter = new chatAdapter(getApplicationContext(), loadedChat);
-                chatAdapter.notifyDataSetChanged();
-
-                // set adapter
-                recyclerView.setAdapter(chatAdapter);
 
 
             }
@@ -230,7 +249,7 @@ public class chatPage extends AppCompatActivity {
 
     }
 
-    private void writeChatHistory(String uid, String friendUserID, String FrienshipID, String msg)   {
+    private void writeChatHistory(String uid, String friendUserID, String FrienshipID, String msg) {
         // user1  , user2 = uid   , friendUserID
         // FrienshipID  = FrienshipID
         // long  timestamp = lastMsg of  the friends
@@ -249,5 +268,23 @@ public class chatPage extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        getdata();
+    }
+
+    private void getdata() {
+
+        SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
+//            PH1 = prefs.getString("ph1", "No name defined");//"No name defined" is the default value.
+//            PH2 = prefs.getString("ph2", "No name defined");
+//            PH3 = prefs.getString("ph3", "No name defined");
+        name = prefs.getString("name", "User");
+//            personalPh = prefs.getString("pph", "none");
+        userImage = prefs.getString("uimage", "User");
+
+
+    }
 }

@@ -1,10 +1,5 @@
 package com.bu.safeguard;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -28,6 +23,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bu.safeguard.models.modelForProfile;
 import com.bu.safeguard.models.modelForRequest;
@@ -81,29 +81,26 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class request_from_activity extends AppCompatActivity {
-    ImageView sosimagechooser , addicon ;
-    LiveButton askForLiveBtn ;
-    StorageReference mStorageReference ;
-    ProgressDialog mprogressDialog ;
-    private Bitmap compressedImageFile;
-    Uri mFilePathUri ;
-    DatabaseReference mref ;
-   String PH1  , PH2  , PH3 , locLink , msg , personalPh , userImage = "null";
-    String uid , mail    , sosmsg;
-    String name = null ;
-
-
     private static final int SMS_PERMISSION_CODE = 5;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =10000 ;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 10000;
     public FusedLocationProviderClient client;
-    Button help , list ;
+    ImageView sosimagechooser, addicon;
+    LiveButton askForLiveBtn;
+    StorageReference mStorageReference;
+    ProgressDialog mprogressDialog;
+    Uri mFilePathUri;
+    DatabaseReference mref;
+    String PH1, PH2, PH3, locLink, msg, personalPh, userImage = "null";
+    String uid, mail, sosmsg;
+    String name = null;
+    Button help, list;
+    String imageLink = "null";
+    EditText sosmsgInput;
+    LiveButton sendHelp;
+    ProgressBar pbar;
+    private Bitmap compressedImageFile;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    String  imageLink = "null" ;
-    EditText sosmsgInput ;
-    LiveButton sendHelp ;
-    ProgressBar pbar ;
-
     private boolean isGPS = false;
 
 
@@ -111,26 +108,22 @@ public class request_from_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_from_activity);
-        askForLiveBtn = findViewById(R.id.askForHelpBtn) ;
+        askForLiveBtn = findViewById(R.id.askForHelpBtn);
         sosimagechooser = findViewById(R.id.sosImageChooser);
         addicon = findViewById(R.id.sosImageaddIcon);
-        sosmsgInput = findViewById(R.id.sosnote) ;
+        sosmsgInput = findViewById(R.id.sosnote);
         pbar = findViewById(R.id.progress_bar);
         pbar.setVisibility(View.GONE);
         ImageView back = findViewById(R.id.back);
 
 
-
-
-       // getSupportActionBar().hide();
+        // getSupportActionBar().hide();
 
         //pregress dialog
-        mprogressDialog = new ProgressDialog(request_from_activity.this  );
+        mprogressDialog = new ProgressDialog(request_from_activity.this);
         mStorageReference = FirebaseStorage.getInstance().getReference("emergencyPic");
         mref = FirebaseDatabase.getInstance().getReference("reqList");
         check();
-
-
 
 
         // vrsomeData();
@@ -156,8 +149,6 @@ public class request_from_activity extends AppCompatActivity {
         locationRequest.setInterval(20 * 1000);
 
 
-
-
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -166,10 +157,10 @@ public class request_from_activity extends AppCompatActivity {
                 }
                 for (Location location : locationResult.getLocations()) {
                     if (location != null) {
-                        double   wayLatitude = location.getLatitude();
-                        double    wayLongitude = location.getLongitude();
+                        double wayLatitude = location.getLatitude();
+                        double wayLongitude = location.getLongitude();
 
-                        getHelp(wayLatitude , wayLongitude ) ;
+                        getHelp(wayLatitude, wayLongitude);
 
                         //     Toast.makeText(MainActivity.this, " LAt  : " + location.getLatitude() + "long "+ location.getLongitude(), Toast.LENGTH_SHORT).show();
 
@@ -184,7 +175,6 @@ public class request_from_activity extends AppCompatActivity {
         };
 
 
-
         sosimagechooser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,7 +187,6 @@ public class request_from_activity extends AppCompatActivity {
                                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
                         BringImagePicker();
-
 
 
                     } else {
@@ -217,72 +206,64 @@ public class request_from_activity extends AppCompatActivity {
         });
 
 
-      askForLiveBtn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
+        askForLiveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-            if(mFilePathUri == null)
-            {
+                if (mFilePathUri == null) {
 
-             imageLink = "null" ;
+                    imageLink = "null";
+
+                }
+
+                getThecornnidates(imageLink);
+
 
             }
-
-            getThecornnidates(imageLink);
-
-
-
-          }
-      });
+        });
     }
 
 
-
     private void getHelp(double wayLatitude, double wayLongitude) {
-     sosmsg=sosmsgInput.getText().toString() ;
-     if(TextUtils.isEmpty(sosmsg))
-     {
-         sosmsg = "null" ;
-     }
+        sosmsg = sosmsgInput.getText().toString();
+        if (TextUtils.isEmpty(sosmsg)) {
+            sosmsg = "null";
+        }
         String delegate = "hh:mm aaa";
-        String  Time = String.valueOf(DateFormat.format(delegate, Calendar.getInstance().getTime()));
-     String   DATE = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String Time = String.valueOf(DateFormat.format(delegate, Calendar.getInstance().getTime()));
+        String DATE = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
-        DATE = Time + " "+ DATE;
+        DATE = Time + " " + DATE;
 
 
         pbar.setVisibility(View.VISIBLE);
         DatabaseReference mef = FirebaseDatabase.getInstance().getReference("reqList");
         String key = mef.push().getKey();
-           String uid = FirebaseAuth.getInstance().getUid() ;
+        String uid = FirebaseAuth.getInstance().getUid();
 
         // String  postid  , name  , number , uid , lon , lat , time , sosImage, sosMsg  ;
-        modelForRequest model =  new modelForRequest(key , mail, personalPh ,  uid ,String.valueOf(wayLatitude)  ,String.valueOf(wayLongitude)  , DATE  , imageLink , sosmsg, userImage) ;
+        modelForRequest model = new modelForRequest(key, mail, personalPh, uid, String.valueOf(wayLatitude), String.valueOf(wayLongitude), DATE, imageLink, sosmsg, userImage);
 
         mef.child(key).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 pbar.setVisibility(View.GONE);
-               sendNotification();
-               sendToSOSSentActivity();
-
+                sendNotification();
+                sendToSOSSentActivity();
 
 
             }
-        }) .addOnFailureListener(new OnFailureListener() {
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 pbar.setVisibility(View.GONE);
                 getdata();
-                sentOfflineMsg(String.valueOf(wayLatitude) ,String.valueOf(wayLongitude) );
+                sentOfflineMsg(String.valueOf(wayLatitude), String.valueOf(wayLongitude));
                 //this is failed
             }
-        }) ;
-
-
-
+        });
 
 
     }
@@ -293,6 +274,7 @@ public class request_from_activity extends AppCompatActivity {
                 .setCropShape(CropImageView.CropShape.RECTANGLE) //shaping the image
                 .start(request_from_activity.this);
     }
+
     @Override
     protected void onActivityResult(/*int requestCode, int resultCode, @Nullable Intent data*/
             int requestCode, int resultCode, Intent data) {
@@ -306,22 +288,20 @@ public class request_from_activity extends AppCompatActivity {
 
                 mFilePathUri = result.getUri();
 
-                    addicon.setVisibility(View.GONE);
+                addicon.setVisibility(View.GONE);
 
-                    sosimagechooser.setImageURI(mFilePathUri);
-
-
+                sosimagechooser.setImageURI(mFilePathUri);
 
 
                 //sending data once  user select the image
-              // uploadPicToServer(mFilePathUri) ;
+                // uploadPicToServer(mFilePathUri) ;
                 uploadPicToCusServer(mFilePathUri);
 
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
                 Exception error = result.getError();
-                Toast.makeText(this, error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
 
@@ -331,8 +311,7 @@ public class request_from_activity extends AppCompatActivity {
 
     private void uploadPicToServer() {
 
-        if(mFilePathUri != null)
-        {
+        if (mFilePathUri != null) {
             final String randomName = UUID.randomUUID().toString();
 
             // PHOTO UPLOAD
@@ -353,36 +332,33 @@ public class request_from_activity extends AppCompatActivity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             compressedImageFile.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] imageData = baos.toByteArray();
-            UploadTask filePath = mStorageReference.child(randomName+uid + ".jpg").putBytes(imageData);
+            UploadTask filePath = mStorageReference.child(randomName + uid + ".jpg").putBytes(imageData);
 
             filePath.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
 
-
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful()) ;
                     Uri downloaduri = uriTask.getResult();
 
-                      imageLink = downloaduri.toString() ;
+                    imageLink = downloaduri.toString();
 
 
+                    mprogressDialog.hide();
+
+                    // mref.child(ts).setValue(downloaduri.toString());
 
 
-                     mprogressDialog.hide();
-
-                   // mref.child(ts).setValue(downloaduri.toString());
-
-
-                  //  sentToPrevActivity();
+                    //  sentToPrevActivity();
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     mprogressDialog.hide();
-                    Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -424,38 +400,35 @@ public class request_from_activity extends AppCompatActivity {
                 public void onSuccess(Location location) {
 
 
-
                     if (location != null) {
-                        double    wayLatitude = location.getLatitude();
-                        double   wayLongitude = location.getLongitude();
+                        double wayLatitude = location.getLatitude();
+                        double wayLongitude = location.getLongitude();
 
-                      getHelp(wayLatitude , wayLongitude ) ;
+                        getHelp(wayLatitude, wayLongitude);
 
 
                         //   Toast.makeText(MainActivity.this, " LAt  : " + location.getLatitude() + "long "+ location.getLongitude(), Toast.LENGTH_SHORT).show();
 
-                    }
-                    else {
+                    } else {
 
                         client.requestLocationUpdates(locationRequest, locationCallback, null);
                     }
                 }
-            })  ;
+            });
         }
 
 
-
     }
-    void check(){
-        ActivityCompat.requestPermissions(this , new String[]{
-                        ACCESS_FINE_LOCATION
-                } ,1
-        );
-        ActivityCompat.requestPermissions(this , new String[]{
-                        ACCESS_COARSE_LOCATION
-                } ,1
-        );
 
+    void check() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                        ACCESS_FINE_LOCATION
+                }, 1
+        );
+        ActivityCompat.requestPermissions(this, new String[]{
+                        ACCESS_COARSE_LOCATION
+                }, 1
+        );
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -465,8 +438,6 @@ public class request_from_activity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     AppConstants.LOCATION_REQUEST);
         }
-
-
 
 
     }
@@ -482,16 +453,15 @@ public class request_from_activity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     client.getLastLocation().addOnSuccessListener(this, location -> {
                         if (location != null) {
-                            double    wayLatitude = location.getLatitude();
-                            double   wayLongitude = location.getLongitude();
+                            double wayLatitude = location.getLatitude();
+                            double wayLongitude = location.getLongitude();
 
 
-                            getHelp(wayLatitude , wayLongitude ) ;
+                            getHelp(wayLatitude, wayLongitude);
 
 
                             //     Toast.makeText(MainActivity.this, " LAt  : " + location.getLatitude() + "long "+ location.getLongitude(), Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                        } else {
 
                             client.requestLocationUpdates(locationRequest, locationCallback, null);
                         }
@@ -501,7 +471,6 @@ public class request_from_activity extends AppCompatActivity {
                     Toast.makeText(request_from_activity.this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
                 break;
-
 
 
             }
@@ -515,8 +484,7 @@ public class request_from_activity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "SMS sent.",
                             Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
 
 
                     return;
@@ -541,40 +509,33 @@ public class request_from_activity extends AppCompatActivity {
 
     }
 
-    private  void sentOfflineMsg(String lat ,String lon) {
+    private void sentOfflineMsg(String lat, String lon) {
         // Now Sent Msg Via sms client but 1st load the  offline emergency number
         SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
         PH1 = prefs.getString("ph1", "No name defined");//"No name defined" is the default value.
         PH2 = prefs.getString("ph2", "No name defined");
         PH3 = prefs.getString("ph3", "No name defined");
-        locLink = " http://maps.google.com/?q=" + lat + ","+ lon  ;
-        userImage = prefs.getString("uimage" , "User") ;
-        mail = prefs.getString("name" , "User") ;
-        msg = "Help "+ mail +" is in danger at "+  locLink ;
-
-
+        locLink = " http://maps.google.com/?q=" + lat + "," + lon;
+        userImage = prefs.getString("uimage", "User");
+        mail = prefs.getString("name", "User");
+        msg = "Help " + mail + " is in danger at " + locLink;
 
 
         // permission
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED)
-        {
+                != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.SEND_SMS)) {
 
 
-
-            }
-
-            else {
+            } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.SEND_SMS},
                         MY_PERMISSIONS_REQUEST_SEND_SMS);
             }
 
-        }
-        else {
+        } else {
             sentTheMsg();
 
         }
@@ -583,8 +544,7 @@ public class request_from_activity extends AppCompatActivity {
 
     private void sentTheMsg() {
         SmsManager smsManager = SmsManager.getDefault();
-        if (!PH1.isEmpty())
-        {
+        if (!PH1.isEmpty()) {
 
             smsManager.sendTextMessage(PH1, null, msg, null, null);
 
@@ -594,29 +554,29 @@ public class request_from_activity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (!PH2.isEmpty())
-                {    smsManager.sendTextMessage(PH2, null, msg, null, null);
+                if (!PH2.isEmpty()) {
+                    smsManager.sendTextMessage(PH2, null, msg, null, null);
 
                 }
 
             }
-        } , 500) ;
+        }, 500);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!PH3.isEmpty())
-                {
+                if (!PH3.isEmpty()) {
                     smsManager.sendTextMessage(PH3, null, msg, null, null);
 
                 }
 
                 sendToSOSSentActivity();
             }
-        } , 1000) ;
+        }, 1000);
 
     }
+
     private void sendNotification() {
         AsyncTask.execute(new Runnable() {
             @Override
@@ -650,7 +610,7 @@ public class request_from_activity extends AppCompatActivity {
                                 + "\"app_id\": \"33ec6730-750a-4579-bc4d-b8e0483a1b4c\","
                                 + "\"included_segments\": [\"Subscribed Users\"],"
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"Alert!! "+ mail  +" In Danger !\"}"
+                                + "\"contents\": {\"en\": \"Alert!! " + mail + " In Danger !\"}"
                                 + "}";
 
 
@@ -690,71 +650,64 @@ public class request_from_activity extends AppCompatActivity {
         super.onStart();
 
 
+        try {
+            uid = FirebaseAuth.getInstance().getUid();
 
 
-            try{
-                uid = FirebaseAuth.getInstance().getUid() ;
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference("profile").child(uid);
+
+            mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    modelForProfile model = dataSnapshot.getValue(modelForProfile.class);
+
+                    // Picasso.get().load(model.getPpLink()).error(R.drawable.user).into(ppimage) ;
+                    //   Picasso.get().load(model.getPpLink()).error(R.drawable.user).into(imageViewonDrawerLayoputLayout) ;
+                    name = model.getNickName();
+                    mail = model.getNickName();
+                    personalPh = model.getPersonalPhone();
+                    userImage = model.getPpLink();
 
 
+                }
 
-                DatabaseReference mref = FirebaseDatabase.getInstance().getReference("profile").child(uid);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                mref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        modelForProfile model = dataSnapshot.getValue(modelForProfile.class);
-
-                       // Picasso.get().load(model.getPpLink()).error(R.drawable.user).into(ppimage) ;
-                     //   Picasso.get().load(model.getPpLink()).error(R.drawable.user).into(imageViewonDrawerLayoputLayout) ;
-                        name= model.getNickName();
-                        mail = model.getNickName();
-                        personalPh = model.getPersonalPhone() ;
-                        userImage = model.getPpLink() ;
+                    getdata();
+                }
+            });
 
 
-
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        getdata();
-                    }
-                });
-
-
-                // Toast.makeText(getApplicationContext(), "name : " + mail  , Toast.LENGTH_SHORT)
-                //    .show();
-            }
-            catch (NullPointerException e )
-            {
-                Toast.makeText(getApplicationContext(), "Error  : "  , Toast.LENGTH_SHORT)
-                        .show();
-            }
+            // Toast.makeText(getApplicationContext(), "name : " + mail  , Toast.LENGTH_SHORT)
+            //    .show();
+        } catch (NullPointerException e) {
+            Toast.makeText(getApplicationContext(), "Error  : ", Toast.LENGTH_SHORT)
+                    .show();
+        }
 
 
     }
-    private  void getdata(){
+
+    private void getdata() {
+
         SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
         PH1 = prefs.getString("ph1", "No name defined");//"No name defined" is the default value.
         PH2 = prefs.getString("ph2", "No name defined");
         PH3 = prefs.getString("ph3", "No name defined");
-        mail = prefs.getString("name" , "User") ;
-        personalPh = prefs.getString("pph", "none") ;
-        userImage = prefs.getString("uimage" , "User") ;
+        mail = prefs.getString("name", "User");
+        personalPh = prefs.getString("pph", "none");
+        userImage = prefs.getString("uimage", "User");
 
-        Toast.makeText(getApplicationContext() , "Ph : " + PH1 + " PH2 : " + PH2  + "name : "+ mail, Toast.LENGTH_SHORT)
+        Toast.makeText(getApplicationContext(), "Ph : " + PH1 + " PH2 : " + PH2 + "name : " + mail, Toast.LENGTH_SHORT)
                 .show();
 
 
-
     }
-    private  void sendToSOSSentActivity()
-    {
 
-        Intent io = new Intent(getApplicationContext() , sos_sent.class);
+    private void sendToSOSSentActivity() {
+
+        Intent io = new Intent(getApplicationContext(), sos_sent.class);
         startActivity(io);
         finish();
 
@@ -770,7 +723,7 @@ public class request_from_activity extends AppCompatActivity {
 
         File file = new File(mFilePathUri.getPath());
 
-        File compressed ;
+        File compressed;
 
         try {
             compressed = new Compressor(this)
@@ -778,10 +731,8 @@ public class request_from_activity extends AppCompatActivity {
                     .setMaxWidth(700)
                     .setQuality(55)
                     .compressToFile(file);
-        }
-        catch (Exception e )
-        {
-            compressed =  file  ;
+        } catch (Exception e) {
+            compressed = file;
         }
         //creating request body for file
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), compressed);
@@ -800,27 +751,24 @@ public class request_from_activity extends AppCompatActivity {
         //creating our api
         api api = retrofit.create(api.class);
 
-        Call<UploadResult> call = api.uploadImage(requestFile) ;
+        Call<UploadResult> call = api.uploadImage(requestFile);
 
         call.enqueue(new Callback<UploadResult>() {
             @Override
             public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
 
 
-                if(response.code() == 200 && response.body() != null)
-                {
-                    UploadResult result =  response.body() ;
+                if (response.code() == 200 && response.body() != null) {
+                    UploadResult result = response.body();
 
 
-                    imageLink = constants.DWLDURL + result.getMsg().toString() ;
+                    imageLink = constants.DWLDURL + result.getMsg().toString();
 
                     mprogressDialog.dismiss();
-                }
-                else
-                {
+                } else {
                     mprogressDialog.dismiss();
 
-                    Toast.makeText(getApplicationContext() , "SomeTHing Went Wrong. Please  Try Again !" , Toast.LENGTH_LONG)
+                    Toast.makeText(getApplicationContext(), "SomeTHing Went Wrong. Please  Try Again !", Toast.LENGTH_LONG)
                             .show();
                 }
 
@@ -828,19 +776,14 @@ public class request_from_activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UploadResult> call, Throwable t) {
-                Log.d("RRR" , t.getMessage().toUpperCase().toString()) ;
+                Log.d("RRR", t.getMessage().toUpperCase().toString());
 
                 mprogressDialog.dismiss();
 
-                Toast.makeText(getApplicationContext() , "SomeTHing Went Wrong Please  Try Again" , Toast.LENGTH_LONG)
+                Toast.makeText(getApplicationContext(), "SomeTHing Went Wrong Please  Try Again", Toast.LENGTH_LONG)
                         .show();
             }
-        }) ;
-
-
-
-
-
+        });
 
 
     }
