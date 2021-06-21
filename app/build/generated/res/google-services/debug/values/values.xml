@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">475181769848-bl3fl6n758acuo9kjdrtc7ki9bcldpt7.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">475181769848</string>
+    <string name="google_api_key" translatable="false">AIzaSyCWq_HT8hVNs_-1yN7RmqPNhlLrf2Fdxw4</string>
+    <string name="google_app_id" translatable="false">1:475181769848:android:b109469d08698b0666398d</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCWq_HT8hVNs_-1yN7RmqPNhlLrf2Fdxw4</string>
+    <string name="google_storage_bucket" translatable="false">safeguard-ac5cd.appspot.com</string>
+    <string name="project_id" translatable="false">safeguard-ac5cd</string>
+</resources>

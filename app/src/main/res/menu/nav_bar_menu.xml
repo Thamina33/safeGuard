@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allAlert"
+        android:icon="@drawable/ic_alert_black_24dp"
+        android:checked="false"
+        android:title="All Alert" />
+
+    <item
+        android:id="@+id/my_Profile"
+        android:checked="false"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="My Profile" />
+    <item
+        android:id="@+id/about_us"
+        android:checked="false"
+        android:visible="false"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="About Us" />
+    <item
+        android:id="@+id/member_ship"
+        android:checked="false"
+        android:visible="false"
+        android:icon="@drawable/ic_card_membership_black_24dp"
+        android:title="Membership" />
+    <item
+        android:id="@+id/donate"
+        android:checked="false"
+        android:visible="false"
+        android:icon="@drawable/ic_monetization_on_black_24dp"
+        android:title="Donate" />
+    <item
+        android:id="@+id/Contact"
+        android:checked="false"
+        android:visible="false"
+        android:icon="@drawable/ic_perm_contact_calendar_black_24dp"
+        android:title="Contact" />
+
+    <item
+        android:id="@+id/rate_us"
+        android:checked="false"
+        android:visible="false"
+        android:icon="@drawable/ic_star_black_24dp"
+        android:title="Rate Us" />
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:checked="false"
+        android:title="Share" />
+
+
+    <item
+        android:id="@+id/menu_go_logout"
+        android:checked="false"
+        android:icon="@drawable/ic_input_black_24dp"
+        android:title="Log Out" />
+
+
+</menu>

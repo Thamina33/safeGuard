@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    
+    <androidx.legacy.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--<pl.droidsonroids.gif.GifImageView
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/car_animation"
+                />-->
+
+
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+
+                    android:text="Mobile Verification"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:text="Please enter your mobile number"
+                    android:layout_gravity="center"/>
+                <androidx.legacy.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginStart="40dp"
+                        android:layout_width="wrap_content"
+                        android:elevation="12dp"
+                        android:layout_height="40dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:background="@drawable/bangladesh"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:layout_height="25dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+88"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textSize="16sp"
+                                android:textColor="#000"
+                                android:layout_gravity="center"
+                                />
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:elevation="12dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <EditText
+                            android:id="@+id/phonenumEditText"
+                            android:layout_width="match_parent"
+                            android:inputType="phone"
+                            android:textSize="16sp"
+                            android:layout_marginStart="8dp"
+                            android:textColor="#000"
+                            android:hint="0177334566"
+                            android:background="#00000000"
+                            android:layout_height="40dp" />
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </LinearLayout>
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp" />
+
+
+                <ImageButton
+                    android:id="@+id/nextBtnmobileverification"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/circle_button"
+                    android:src="@drawable/ar"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:scaleType="fitXY"/>
+                <androidx.legacy.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Terms And Condition"
+                    android:visibility="gone"
+                    android:layout_marginTop="35dp"
+                    android:layout_gravity="center"/>
+
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

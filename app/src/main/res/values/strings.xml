@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SafeGuard</string>
+
+    <string name="google_maps_key">AIzaSyBORN2iLz3zCd_rWWv9EcThzXzBYAm2kpg</string>
+    <string name="vlose">close</string>
+    <string name="facebook_app_id">2699370890152086</string>
+    <string name="fb_login_protocol_scheme">fb2699370890152086</string>
+    <string name="open">open</string>
+    <string name="bak">SafeGuard</string>
+    <string name="search_title">Search</string>
+    <string name="tab_text_1">Chat</string>
+    <string name="tab_text_2">Alerts</string>
+    <string name="tab_text_3">Groups</string>
+    <string name="add_friend">Add Friend</string>
+</resources>

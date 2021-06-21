@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.bu.safeguard",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "PROCESSED_RES"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 4,
+        "versionName": "1.04",
+        "outputFile": "app-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "resources-debug.ap_",
+      "properties": {
+        "packageId": "com.bu.safeguard",
+        "split": "",
+        "minSdkVersion": "22"
+      }
+    }
+  ]
+}

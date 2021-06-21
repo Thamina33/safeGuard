@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "475181769848",
+    "project_id": "safeguard-ac5cd",
+    "storage_bucket": "safeguard-ac5cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475181769848:android:b109469d08698b0666398d",
+        "android_client_info": {
+          "package_name": "com.bu.safeguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475181769848-bl3fl6n758acuo9kjdrtc7ki9bcldpt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWq_HT8hVNs_-1yN7RmqPNhlLrf2Fdxw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475181769848-bl3fl6n758acuo9kjdrtc7ki9bcldpt7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

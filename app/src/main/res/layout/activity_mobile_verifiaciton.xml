@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:indeterminateTint="@color/colorPrimary"
+        android:id="@+id/progrssBar"
+        android:indeterminate="true"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_height="12dp"
+        android:visibility="invisible"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="8dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/backbtn"
+            android:background="@drawable/red_arrow"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/ima" />
+
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter OTP"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"/>
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:lineSpacingExtra="4dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:text="We have sent you access code\n Via SMS For Mobile Verificaiton"/>
+
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:layout_gravity="center"
+                android:layout_marginTop="55dp"
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                app:height="45dp"
+                app:width="40dp"
+                app:bar_enabled="false"
+                app:bar_height="2dp"
+                app:length="6"
+                app:otp_box_background="@drawable/otp_box_active"
+                app:otp=""
+                app:bar_margin_left="5dp"
+                app:bar_active_color="@color/colorPrimary"
+                app:otp_text_size="24dp"/>
+
+            <ImageButton
+                android:id="@+id/signin_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/circle_button"
+                android:src="@drawable/ar"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Didn't Recieve the OTP?"
+                android:textSize="17sp"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="70dp"/>
+
+            <ir.samanjafari.easycountdowntimer.EasyCountDownTextview
+                android:id="@+id/easyCountDownTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:digitBackground="@color/transparent"
+                app:second="60"
+                app:showHours="false"
+                app:textSize="12sp"
+                android:layout_marginTop="10dp"
+                app:textColor="@color/colorPrimary"
+                app:setAnimation="true"
+                app:showOnlySecond="true"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone"
+                android:focusable="true"
+                android:textColor="@color/colorPrimary"
+                android:text="Resend Code"
+                android:id="@+id/resendTv"
+                />
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
