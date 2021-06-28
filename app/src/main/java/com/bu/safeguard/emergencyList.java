@@ -58,7 +58,7 @@ public class emergencyList extends AppCompatActivity {
     String uid ;
     private DrawerLayout drawerLayout;
     NavigationView navigationView ;
-    ImageView hamburger  ,  errorImage;
+    ImageView hamburger  ,  errorImage,back;
     CircleImageView ppimage  , imageViewonDrawerLayoputLayout;
     TextView allList  ,addresss , name  , noData;
     FirebaseRecyclerAdapter<modelForRequest, viewholder> firebaseRecyclerAdapter ;
@@ -76,6 +76,7 @@ public class emergencyList extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         hamburger = findViewById(R.id.hamburger);
+        back = findViewById(R.id.back);
         ppimage = findViewById(R.id.profile_image) ;
         navigationView = findViewById(R.id.navigation_view);
         noData = findViewById(R.id.noView) ;
@@ -181,7 +182,12 @@ public class emergencyList extends AppCompatActivity {
                 }
             }
         });
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         linearLayoutManager = new LinearLayoutManager(this) ;
         linearLayoutManager.setStackFromEnd(true);

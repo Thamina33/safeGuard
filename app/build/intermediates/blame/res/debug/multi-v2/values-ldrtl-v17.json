@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "K:\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+            "outputFile": "C:\\Users\\Toma\\Downloads\\Compressed\\safeGuard\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldrtl-v17\\values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "E:\\.gradle\\caches\\transforms-2\\files-2.1\\cefe1c6ad1cfb0560a929cdefef1847b\\jetified-finestwebview-1.2.7\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "source": "C:\\Users\\Toma\\.gradle\\caches\\transforms-2\\files-2.1\\42b117924bfafeec2f42b943c50279a1\\jetified-finestwebview-1.2.7\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

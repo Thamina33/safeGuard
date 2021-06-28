@@ -46,6 +46,8 @@ public class chatPage extends AppCompatActivity {
         recyclerView = findViewById(R.id.list);
         chatINput = findViewById(R.id.message_input);
         sendBtn = findViewById(R.id.message_send_btn);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         uid = FirebaseAuth.getInstance().getUid();
@@ -286,5 +288,11 @@ public class chatPage extends AppCompatActivity {
         userImage = prefs.getString("uimage", "User");
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "K:\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-vi-rVN\\values-vi-rVN.xml",
+            "outputFile": "C:\\Users\\Toma\\Downloads\\Compressed\\safeGuard\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-vi-rVN\\values-vi-rVN.xml",
             "map": [
                 {
-                    "source": "E:\\.gradle\\caches\\transforms-2\\files-2.1\\d98332b05cfcbe9f08a6dc5f1adc9bad\\jetified-AppIntro-5.1.0\\res\\values-vi-rVN\\values-vi-rVN.xml",
+                    "source": "C:\\Users\\Toma\\.gradle\\caches\\transforms-2\\files-2.1\\d98332b05cfcbe9f08a6dc5f1adc9bad\\jetified-AppIntro-5.1.0\\res\\values-vi-rVN\\values-vi-rVN.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

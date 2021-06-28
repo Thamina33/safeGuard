@@ -57,6 +57,7 @@ public class accountSetupPage extends AppCompatActivity {
 
     EditText namein, nickNamein, phonein, emerPh1in, emerph2in, areain, emrgenyph3;
     String name, nickName, phone, emerph1, emerph2, emerph3, area, userImagE;
+
     Button submitBtn;
 
     FirebaseAuth mauth;
@@ -289,7 +290,7 @@ public class accountSetupPage extends AppCompatActivity {
                     result = response.body() ;
 
                     // upload the data  to database
-                    modelForProfile model = new modelForProfile(name, nickName, phone, emerph1, emerph2, area, uid,constants.DWLDURL +  result.getMsg(), emerph3 , Double.parseDouble("0") , Double.parseDouble("0") );
+                    modelForProfile model = new modelForProfile(name, nickName, phone, emerph1, emerph2, area, uid,constants.DWLDURL +  result.getMsg(), emerph3 , Double.parseDouble("0") , Double.parseDouble("0"));
 
                     mref.setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

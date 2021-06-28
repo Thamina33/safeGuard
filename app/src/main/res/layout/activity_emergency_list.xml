@@ -30,11 +30,22 @@
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/ic_dehaze_black_24dp"
             android:focusable="true" />
-
+        <ImageView
+            android:id="@+id/back"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="13dp"
+            android:background="@drawable/ic_baseline_arrow_black"
+            android:focusable="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

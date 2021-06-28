@@ -48,7 +48,10 @@
                 android:layout_weight="1.0"
                 android:background="@android:color/transparent"
                 android:hint="Message"
-                android:imeOptions="actionSearch" />
+                android:imeOptions="actionSearch"
+                android:paddingStart="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_4sdp"
+               />
 
             <ImageView
                 android:layout_width="50.0dip"

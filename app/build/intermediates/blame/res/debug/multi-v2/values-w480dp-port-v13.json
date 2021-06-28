@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "K:\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+            "outputFile": "C:\\Users\\Toma\\Downloads\\Compressed\\safeGuard\\safeGuard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "E:\\.gradle\\caches\\transforms-2\\files-2.1\\af6a6e36175612c97c92704370de65d8\\material-1.2.0-alpha05\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+                    "source": "C:\\Users\\Toma\\.gradle\\caches\\transforms-2\\files-2.1\\af6a6e36175612c97c92704370de65d8\\material-1.2.0-alpha05\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

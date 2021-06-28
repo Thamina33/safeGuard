@@ -1,7 +1,9 @@
 package com.bu.safeguard.models;
 
 public class    modelForProfile {
-    String fullname , nickName , personalPhone , emerph1 , emerph2  , area , uid , ppLink  ,emerph3  ;
+    String fullname , nickName , personalPhone , emerph1 , emerph2  , area , uid , ppLink  ,emerph3,  isOnline   ;
+    Long joinTimeStamp ;
+
     Double currentLat , currentLong ;
 
 
@@ -113,4 +115,5 @@ public class    modelForProfile {
     public void setUid(String uid) {
         this.uid = uid;
     }
+    
 }

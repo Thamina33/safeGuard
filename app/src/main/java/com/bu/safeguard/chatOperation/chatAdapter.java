@@ -163,7 +163,7 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.myHolder> {
     class myHolder extends RecyclerView.ViewHolder
     {
 
-      public  TextView msgView , date  ; SelectableRoundedImageView imageView ;
+      public  TextView name, msgView , date  ; SelectableRoundedImageView imageView ;
 
 
 
@@ -175,7 +175,7 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.myHolder> {
         public myHolder(@NonNull View itemView) {
             super(itemView);
 
-
+            name = itemView.findViewById(R.id.name);
             msgView = itemView.findViewById(R.id.msgTv);
             date = itemView.findViewById(R.id.dateview) ;
             imageView = itemView.findViewById(R.id.image) ;

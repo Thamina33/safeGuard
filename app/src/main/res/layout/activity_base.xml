@@ -24,7 +24,6 @@
             app:tabSelectedTextColor="@color/white"
             app:tabIconTint="@color/color_selector"
             app:tabIndicatorColor="@color/colorAccent"
-
             app:tabTextAppearance="@style/tab_text"
             android:background="?attr/colorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>

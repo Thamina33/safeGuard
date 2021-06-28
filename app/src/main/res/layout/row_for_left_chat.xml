@@ -8,7 +8,18 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:id="@+id/name"
+        android:layout_marginEnd="@dimen/_3sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
+        />
     <TextView
         android:id="@+id/msgTv"
         android:layout_width="wrap_content"
@@ -20,11 +31,12 @@
         android:linksClickable="true"
         android:maxWidth="@dimen/_180sdp"
         android:padding="@dimen/_8sdp"
-        android:text="Hello ,Hello Nigga "
+        android:text="Hello ,Hello"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/name"
+         />
 
     <TextView
         android:layout_width="wrap_content"
